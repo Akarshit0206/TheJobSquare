@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router";
+import saveFavs from "../assets/saveFavs.webp";
 
 function Applicants() {
   const favObj = useSelector((state) => state.favourates);
@@ -20,6 +21,17 @@ function Applicants() {
       localStorage.setItem("favourates", JSON.stringify(favObj));
   }, [favObj]);
 
+  if (!Object.keys(favObj).length) {
+    return (
+      <div className="flex flex-col items-center justify-center m-5 ">
+        <img
+          src={saveFavs}
+          alt="Save Your Favs"
+          className="rounded-2xl h-[70vh]"
+        />
+      </div>
+    );
+  }
   return (
     <div className="w-full flex gap-10 flex-wrap justify-center mt-5">
       {ids.map((id) => (
